@@ -9,11 +9,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Label
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -23,9 +30,20 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.pjlaapps.maisumplano.screens.Home
+import com.pjlaapps.maisumplano.screens.ListarPlano
+import com.pjlaapps.maisumplano.screens.NovoPlano
 import com.pjlaapps.maisumplano.ui.theme.MaisUmPlanoTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,52 +51,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MaisUmPlanoTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TelaCadastro(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Surface (color=MaterialTheme.colorScheme.background){
+                ScreenMain()
             }
         }
     }
 }
 
 @Composable
-fun TelaCadastro(modifier: Modifier = Modifier) {
-    var nome by rememberSaveable {
-        mutableStateOf("Meu Primeiro Plano")
-    }
-    var qtedias by rememberSaveable {
-        mutableStateOf("30")
-    }
-    val context = LocalContext.current
-    Column (
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize()
-    )
-    {
-        Text(
-            text = "Meu Primeiro Plano",
-            modifier = modifier.padding(15.dp)
-        )
-        TextField(
-            value = nome,
-            onValueChange = {nome = it},
-            label = {Text("Nome Plano")}
-        )
-        TextField(value = qtedias, onValueChange = {qtedias = it},
-            label = {Text("Quantidade de Dias")}
-            )
-
-        Button(
-            modifier = Modifier.padding(10.dp),
-            onClick = {
-
-            Toast.makeText(context, "Bem vindo ao APP!", Toast.LENGTH_LONG).show()
-        }) {
-            Text(text = "Criar")
+fun ScreenMain() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Routes.Home.route) {
+        composable(Routes.Home.route) {
+            Home(navController = navController)
+        }
+        composable(Routes.NovoPlano.route) {
+            NovoPlano(navController = navController)
+        }
+        composable(Routes.ListarPlano.route) {
+            ListarPlano(navController = navController)
         }
     }
 }
@@ -86,7 +77,5 @@ fun TelaCadastro(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun MeuPrimeiroPlanoPreview() {
-    MaisUmPlanoTheme {
-        TelaCadastro()
-    }
+ScreenMain()
 }
