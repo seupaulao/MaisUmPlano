@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.pjlaapps.maisumplano.ScreenMain
 
 
 /**
@@ -27,8 +29,9 @@ import androidx.navigation.NavHostController
  *   - precisa de state para passar parametro?
  *   - calcular um novo tamanho e passar no vetor e exibir a lista
  */
+
 @Composable
-fun ListarPlano(navController: NavHostController,) {
+fun ListarPlano() {
     val linguagens = listOf("C++", "C", "C#", "Java", "Kotlin", "Dart", "Python", "Javascript", "SpringBoot",
         "XML", "Dart", "Node JS", "Typescript", "Dot Net", "GoLang", "MongoDb")
 
@@ -57,4 +60,10 @@ fun ListarPlano(navController: NavHostController,) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewLista() {
+    ListarPlano()
 }

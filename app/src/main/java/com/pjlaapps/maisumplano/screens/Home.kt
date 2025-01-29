@@ -35,6 +35,7 @@ fun Home(navController: NavHostController) {
             Button(onClick = { navController.navigate(Routes.ListarPlano) }) {
                 Text(text = "Listar Planos", color = Color.White)
             }
+
         }
     }
 }

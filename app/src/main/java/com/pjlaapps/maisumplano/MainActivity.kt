@@ -45,11 +45,12 @@ import com.pjlaapps.maisumplano.screens.Home
 import com.pjlaapps.maisumplano.screens.ListarPlano
 import com.pjlaapps.maisumplano.screens.NovoPlano
 import com.pjlaapps.maisumplano.ui.theme.MaisUmPlanoTheme
+import java.io.Serial
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContent {
             Surface (color=MaterialTheme.colorScheme.background){
                 ScreenMain()
@@ -57,6 +58,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Serializable
+object Home
+
 
 @Composable
 fun ScreenMain() {
@@ -66,10 +71,10 @@ fun ScreenMain() {
             Home(navController = navController)
         }
         composable(Routes.NovoPlano.route) {
-            NovoPlano(navController = navController)
+            NovoPlano()
         }
         composable(Routes.ListarPlano.route) {
-            ListarPlano(navController = navController)
+            ListarPlano()
         }
     }
 }

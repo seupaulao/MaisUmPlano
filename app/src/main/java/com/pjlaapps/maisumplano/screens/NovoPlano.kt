@@ -19,13 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.pjlaapps.maisumplano.Routes
 
 
 @Composable
-fun NovoPlano(navController: NavHostController, modifier: Modifier = Modifier) {
+fun NovoPlano(modifier: Modifier = Modifier) {
     var nome by rememberSaveable {
         mutableStateOf("Meu Primeiro Plano")
     }
@@ -61,14 +62,20 @@ fun NovoPlano(navController: NavHostController, modifier: Modifier = Modifier) {
                 }) {
                 Text(text = "Criar")
             }
-            Spacer(modifier = Modifier.width(10.dp))
-            Button(onClick = { navController.navigate(Routes.Home) }) {
-                Text(text = "Voltar")
-            }
+//            Spacer(modifier = Modifier.width(10.dp))
+//            Button(onClick = { navController.navigate(Routes.Home) }) {
+//                Text(text = "Voltar")
+//            }
         }
 
 
      //   mostrarLista()
     }
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewCadastro() {
+    NovoPlano()
 }
