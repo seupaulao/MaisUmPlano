@@ -13,12 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.pjlaapps.maisumplano.Routes
+
 
 @Composable
-fun Home(navController: NavHostController) {
+fun Home(
+    onTelaNovoPlano: () -> Unit,
+    onTelaListarPlano: () -> Unit
+) {
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Color.White),
@@ -28,14 +31,19 @@ fun Home(navController: NavHostController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            Button(onClick = { navController.navigate(Routes.NovoPlano) }) {
+            Button(
+                onClick = { onTelaNovoPlano() }
+            ) {
                 Text(text = "Cadastrar Novo Plano", color = Color.White)
             }
             Spacer(modifier = Modifier.height(20.dp))
-            Button(onClick = { navController.navigate(Routes.ListarPlano) }) {
+            Button(
+                onClick = { onTelaListarPlano() }
+            ) {
                 Text(text = "Listar Planos", color = Color.White)
             }
 
         }
     }
 }
+
